@@ -1,0 +1,36 @@
+{{define "public_room_detail"}}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <title>{{.RoomDetail.TypeName}} {{.RoomDetail.RoomNumber}} — Alam Segar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detail kamar {{.RoomDetail.RoomNumber}} di {{.RoomDetail.PropertyName}}.">
+    <link rel="icon" href="/assets/public/images/icon.png" type="image/png">
+    <link rel="stylesheet" href="/assets/public/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/plugins.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/color.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/colors/brown.css" type="text/css">
+</head>
+<body>
+<div id="wrapper">
+    <header class="header-fullwidth"><div class="container"><div class="row"><div class="col-md-12">
+        <div id="logo"><a href="/"><img class="logo" src="/assets/public/images/logo.png" alt="Alam Segar"></a></div><span id="menu-btn"></span>
+        <nav><ul id="mainmenu"><li><a href="/">Home</a></li><li><a href="/kamar">Kamar</a></li><li><a href="/booking">Booking</a></li><li><a href="/masuk">Masuk</a></li></ul></nav>
+    </div></div></div></header>
+    <section id="subheader" data-bgimage="url(/assets/public/images/background/6.jpg)" class="text-light"><div class="center-y relative text-center"><div class="container"><div class="row"><div class="col-md-12"><h1>{{.RoomDetail.TypeName}}</h1><p>Kamar {{.RoomDetail.RoomNumber}} — {{.RoomDetail.PropertyName}}</p></div></div></div></div></section>
+    <section><div class="container"><div class="row">
+        <div class="col-lg-8"><div class="room-single"><div class="room-single-carousel owl-carousel owl-theme">
+            {{range .RoomDetail.Photos}}<img src="/uploads/{{.}}" alt="Kamar {{$.RoomDetail.RoomNumber}}">{{else}}<img src="/assets/public/images/room-single/1.jpg" alt="Kamar {{.RoomDetail.RoomNumber}}"><img src="/assets/public/images/room-single/2.jpg" alt="Sudut lain kamar {{.RoomDetail.RoomNumber}}">{{end}}
+        </div><div class="spacer-single"></div><h3>Room Details</h3><p>{{if .RoomDetail.Description}}{{.RoomDetail.Description}}{{else}}Detail kamar segera di-update.{{end}}</p>
+        {{if .RoomDetail.Amenities}}<h4>Fasilitas</h4><ul>{{range .RoomDetail.Amenities}}<li>{{.}}</li>{{end}}</ul>{{end}}
+        </div></div>
+        <div class="col-lg-4"><div class="p-4 border"><h3>Kamar {{.RoomDetail.RoomNumber}}</h3><p><strong>{{rupiah .RoomDetail.MonthlyRate}}</strong> / bulan</p>{{if .RoomDetail.AnnualRate}}<p><strong>{{rupiah .RoomDetail.AnnualRate}}</strong> / tahun</p>{{end}}<p>Owner cek availability saat booking.</p><a class="btn-line" href="/booking"><span>Booking Kamar</span></a></div></div>
+    </div></div></section>
+</div>
+<script src="/assets/public/js/plugins.js"></script><script src="/assets/public/js/designesia.js"></script>
+</body>
+</html>
+{{end}}
+

@@ -1,0 +1,13 @@
+Saya ingin kamu MEMBANGUN APLIKASI WEB MANAJEMEN KOS SECARA END-TO-END berdasarkan dokumen `KONTEKS_LENGKAP_CODEX_KOS_MANAGEMENT.md` di root proyek. Baca dokumen tersebut sampai selesai, lalu jadikan sebagai spesifikasi utama, bukan inspirasi.
+
+Instruksi kerja:
+1. Audit repositori, identifikasi kode dan fitur yang sudah berfungsi. Jangan merusak/menghapus/mengganti stack proyek yang sudah berjalan. Jangan menyentuh data produksi atau migrasi destruktif tanpa izin.
+2. Jika repo kosong, bangun aplikasi baru memakai Laravel + MySQL/MariaDB + Blade/Livewire/Tailwind (panel pemilik dapat memakai Filament yang kompatibel), dengan seluruh antarmuka Bahasa Indonesia.
+3. Susun daftar pekerjaan/checklist menurut fase 0 sampai fase 6 di dokumen, lalu langsung IMPLEMENTASIKAN. Lanjutkan otomatis dari satu fase ke fase berikutnya tanpa berhenti hanya untuk memberi rencana atau meminta konfirmasi yang tidak esensial.
+4. Implementasi wajib menyertakan halaman yang nyata, workflow lengkap, migrasi, validasi, hak akses owner/tenant, upload berkas privat, notifikasi website+email, otomatisasi tagihan/reminder, akuntansi double-entry, laporan, dan tes. Tidak boleh ada tombol dummy, data grafik hardcode, atau fitur sekadar placeholder yang diklaim selesai.
+5. Pertahankan aturan khusus: PLN token dan PDAM kamar dibayar langsung penghuni (tidak masuk invoice kos); listrik/air bersama menjadi beban pemilik; booking perlu persetujuan; uang booking dipilih per transaksi; tagihan tahunan punya preset cicilan; transfer selalu diverifikasi pemilik; tidak ada deposit/denda; pengeluaran wajib bukti; tutup buku bulanan manual; hanya dua role login (pemilik dan penghuni).
+6. Jadikan UI modern, tidak terlalu kecil tulisannya, responsif dari HP kecil hingga tablet, desktop, dan HP lipat. Harus aman, mudah dipakai, dan semua label/validasi/email berbahasa Indonesia.
+7. Jalankan tes, perbaiki error, buat README instalasi/penggunaan dan `.env.example`, sertakan seed DEMO yang aman (tidak dipakai di produksi), dan catat perubahan/progres setelah tiap fase.
+8. Jangan bilang selesai sebelum alur utama booking -> kontrak -> tagihan -> unggah bukti -> verifikasi -> jurnal kas/bank -> laporan -> tutup buku bekerja dan lolos pengujian. Jika sesi terhenti, tinggalkan progres dan langkah resume yang jelas; jangan klaim telah melakukan pekerjaan yang belum dilakukan.
+
+Mulai sekarang: inspeksi repository, buat rencana kerja ringkas yang dapat dieksekusi, lalu lanjutkan implementasi konkret sampai selesai sesuai spesifikasi.

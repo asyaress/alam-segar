@@ -1,0 +1,60 @@
+{{define "public_home"}}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <title>{{.Title}} — Kos Nyaman, Hidup Lebih Easy</title>
+    <link rel="icon" href="/assets/public/images/icon.png" type="image/png" sizes="16x16">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cari kamar, ajukan booking, dan kelola hunian Anda di Alam Segar.">
+    <link rel="stylesheet" href="/assets/public/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/plugins.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/color.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/colors/brown.css" type="text/css">
+    <style>.home-flow-card{height:100%;padding:28px;background:rgba(255,255,255,.94);border-radius:2px;color:#2c2824}.home-flow-card .step{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#79552a;color:#fff;font-weight:700;margin-bottom:16px}.de-room .d-text p{min-height:72px}.hero-kicker{letter-spacing:.18em;text-transform:uppercase;font-weight:700}@media(max-width:767px){.hero-home h1{font-size:48px;line-height:1.05}.de-room .d-text p{min-height:0}.header-fullwidth .btn-main{display:none}}</style>
+</head>
+<body class="has-menu-bar">
+<div id="wrapper">
+    <div id="de-loader"></div>
+    <header class="header-fullwidth transparent"><div class="container-fluid"><div class="row"><div class="col-md-12"><div class="de-flex sm-pt10">
+        <div class="de-flex-col"><div id="logo"><a href="/"><img class="logo" src="/assets/public/images/logo.png" alt="Alam Segar"></a></div></div>
+        <div class="de-flex-col header-col-mid"><ul id="mainmenu"><li><a href="/">Home</a></li><li><a href="/kamar">Kamar</a></li><li><a href="/booking">Booking</a></li><li><a href="/booking/pembayaran">Upload Bukti</a></li><li><a href="/masuk">Masuk</a></li></ul></div>
+        <div class="de-flex-col"><div id="menu-btn"></div></div>
+    </div></div></div></div></header>
+    <div id="menu-overlay" class="slideDown"><div class="container-fluid"><div class="row-fluid"><div class="col-md-12"><div id="mo-button-close"><div class="line-1"></div><div class="line-2"></div></div><div class="pt80 pb80"><div class="mo-nav text-center"><a href="/"><img class="logo" src="/assets/public/images/logo.png" alt="Alam Segar"></a><div class="spacer-single"></div><ul id="mo-menu"><li><a href="/">Home</a></li><li><a href="/kamar">Kamar</a></li><li><a href="/booking">Booking</a></li><li><a href="/booking/pembayaran">Upload Bukti</a></li><li><a href="/daftar">Daftar</a></li><li><a href="/masuk">Masuk</a></li></ul></div></div></div></div></div></div>
+</div>
+
+<div id="content" class="no-bottom no-top">
+    <section class="no-top no-bottom jarallax vertical-center hero-home" data-video-src="mp4:/assets/public/video/local-video-1.mp4"><div class="de-overlay v-center"><div class="container"><div class="row"><div class="col-lg-7"><p class="lead hero-kicker wow fadeInUp">{{.Property.Name}}</p><h1 class="wow fadeInUp" data-wow-delay=".1s">Kos Nyaman.<br>Hidup Lebih Easy.</h1><p class="lead wow fadeInUp" data-wow-delay=".2s">Booking jelas, bayarnya aman, semua ke-track.</p><a class="btn-main wow fadeInUp" data-wow-delay=".3s" href="/kamar"><span>Cek Kamar</span></a></div></div></div></div></section>
+    <div class="no-top no-bottom bg-color text-light"><div class="container-fluid"><div class="row g-0">
+        <div class="col-md-4 p-3" data-bgcolor="rgba(0,0,0,.2)"><div class="info-box padding20"><i class="icon_check_alt2"></i><div class="info-box_text"><div class="info-box_title">Booking, No Drama</div><div class="info-box_subtite">Owner cek dulu, baru kamar di-hold</div></div></div></div>
+        <div class="col-md-4 p-3" data-bgcolor="rgba(0,0,0,.4)"><div class="info-box padding20"><i class="icon_creditcard"></i><div class="info-box_text"><div class="info-box_title">Transfer Aman</div><div class="info-box_subtite">Bukti tetap diverifikasi owner</div></div></div></div>
+        <div class="col-md-4 p-3" data-bgcolor="rgba(0,0,0,.6)"><div class="info-box padding20"><i class="icon_mobile"></i><div class="info-box_text"><div class="info-box_title">Semua di HP</div><div class="info-box_subtite">Tagihan, kontrak, dan layanan kos</div></div></div></div>
+    </div></div></div>
+
+    <section class="jarallax"><img src="/assets/public/images/background/7.jpg" class="jarallax-img" alt="Interior Alam Segar"><div class="container"><div class="row gx-4">
+        <div class="col-lg-12 text-center"><h2 class="title center">Kamar yang Lagi Available<span class="small-border"></span></h2></div>
+        {{range .Rooms}}<div class="col-lg-4 col-md-6"><div class="de-room"><div class="d-image"><div class="d-label">Available</div><div class="d-details"><span class="d-meta-1"><img src="/assets/public/images/ui/user.svg" alt="">1 Penghuni</span></div><a href="/properti/{{.PropertySlug}}/kamar/{{.Slug}}"><img src="{{if .CoverPhoto}}/uploads/{{.CoverPhoto}}{{else}}/assets/public/images/room/1.jpg{{end}}" class="img-fluid" alt="Kamar {{.Number}}"><img src="/assets/public/images/room/1-alt.jpg" class="d-img-hover img-fluid" alt="Interior kamar"></a></div><div class="d-text"><h3>{{.TypeName}} — {{.Number}}</h3><p>{{if .Description}}{{.Description}}{{else}}Kamar nyaman, clean, dan praktis.{{end}}</p><a href="/properti/{{.PropertySlug}}/kamar/{{.Slug}}" class="btn-line"><span>{{rupiah .MonthlyRate}} / bulan</span></a></div></div></div>{{else}}<div class="col-lg-8 offset-lg-2 text-center"><div class="home-flow-card"><h3>Belum ada kamar available</h3><p>Check lagi nanti, ya.</p></div></div>{{end}}
+        <div class="col-12 text-center mt30"><a class="btn-main" href="/kamar">Semua Kamar</a></div>
+    </div></div></section>
+
+    <section id="section-intro" class="pt60" data-bgcolor="#79552A"><div class="container"><div class="row align-items-center">
+        <div class="col-lg-3 col-6"><div class="spacer-double sm-hide"></div><img src="/assets/public/images/misc/1.jpg" alt="Suasana kamar Alam Segar" class="img-responsive wow fadeInUp" data-wow-duration="1s"></div>
+        <div class="col-lg-3 col-6"><img src="/assets/public/images/misc/2.jpg" alt="Fasilitas hunian Alam Segar" class="img-responsive wow fadeInUp" data-wow-duration="1.5s"></div>
+        <div class="col-lg-6 wow fadeIn"><div class="padding20"><h2 class="title mb10">Sewa Kos,<br>No Ribet.<span class="small-border"></span></h2><p>Pilih kamar, booking, bayar, lalu lanjut dari HP. Simple.</p></div></div>
+    </div></div></section>
+
+    <section class="jarallax"><img src="/assets/public/images/background/4.jpg" class="jarallax-img" alt="Alur menjadi penghuni"><div class="container"><div class="row gx-4">
+        <div class="col-lg-12 text-center"><h2 class="title center">Flow-nya Gini<span class="small-border"></span></h2></div>
+        <div class="col-lg-3 col-md-6 mb30"><div class="home-flow-card"><span class="step">1</span><h4>Pilih Kamar</h4><p>Cek kamar dan tanggal masuk.</p></div></div>
+        <div class="col-lg-3 col-md-6 mb30"><div class="home-flow-card"><span class="step">2</span><h4>Owner Cek</h4><p>Availability dan nominal dikonfirmasi.</p></div></div>
+        <div class="col-lg-3 col-md-6 mb30"><div class="home-flow-card"><span class="step">3</span><h4>Bayar</h4><p>Transfer lalu upload bukti.</p></div></div>
+        <div class="col-lg-3 col-md-6 mb30"><div class="home-flow-card"><span class="step">4</span><h4>Move In</h4><p>Aktifkan akun, sign kontrak, done.</p></div></div>
+    </div></div></section>
+
+    <footer class="no-top pl20 pr20"><div class="subfooter"><div class="container-fluid"><div class="row"><div class="col-md-6">&copy; 2026 <span class="id-color">Alam Segar</span> — Sistem Manajemen Kos</div><div class="col-md-6 text-right"><a href="/kamar">Kamar</a> &nbsp;·&nbsp; <a href="/booking">Booking</a> &nbsp;·&nbsp; <a href="/masuk">Masuk</a></div></div></div></div><a href="#" id="back-to-top"></a></footer>
+</div>
+<script src="/assets/public/js/plugins.js"></script><script src="/assets/public/js/designesia.js"></script>
+</body></html>
+{{end}}

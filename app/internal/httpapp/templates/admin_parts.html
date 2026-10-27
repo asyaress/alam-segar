@@ -1,0 +1,80 @@
+{{define "owner_start"}}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
+    <title>{{.Title}}</title>
+    <link rel="shortcut icon" type="image/png" href="/assets/admin/images/favicon.png">
+    <link href="/assets/admin/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="/assets/admin/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="/assets/admin/css/style.css" rel="stylesheet">
+    <style>.dataTables_wrapper .dataTables_filter input,.dataTables_wrapper .dataTables_length select{border:1px solid #ddd;border-radius:8px;padding:7px 10px;background:#fff}.dataTables_wrapper .dataTables_filter input{margin-left:8px}.table-responsive .dataTables_wrapper{min-width:720px}.modal .modal-content{border:0;border-radius:16px}.modal .modal-header{border-bottom:1px solid #eee}.chart-empty{min-height:280px;display:grid;place-items:center;color:#777}@media(max-width:575px){.header-right .nav-item.me-3{display:none}.content-body .container-fluid{padding-left:14px;padding-right:14px}.card-body{padding:18px}.btn{min-height:42px}.modal-dialog{margin:10px}}</style>
+</head>
+<body>
+<div id="preloader"><div class="lds-ripple"><div></div><div></div></div></div>
+<div id="main-wrapper">
+    <div class="dlab-demo-content d-none" aria-hidden="true"></div>
+    <div class="nav-header"><a href="/pemilik" class="brand-logo"><img class="logo-abbr" src="/assets/admin/images/logo.png" alt="Alam Segar"><img class="brand-title" src="/assets/admin/images/logo-text.png" alt="Alam Segar"></a><div class="nav-control"><div class="hamburger"><span class="line"></span><span class="line"></span><span class="line"></span></div></div></div>
+    <div class="header"><div class="header-content"><nav class="navbar navbar-expand"><div class="collapse navbar-collapse justify-content-between"><div class="header-left"><div class="dashboard_bar">{{.Title}}</div></div><ul class="navbar-nav header-right"><li class="nav-item d-flex align-items-center me-3">{{.User.Name}}</li><li class="nav-item"><form action="/keluar" method="post"><input type="hidden" name="csrf_token" value="{{.CSRFToken}}"><button class="btn btn-primary btn-sm" type="submit">Keluar</button></form></li></ul></div></nav></div></div>
+    <div class="dlabnav"><div class="dlabnav-scroll"><ul class="metismenu" id="menu">
+        <li><a href="/pemilik"><i class="flaticon-381-home-2"></i><span class="nav-text">Dashboard</span></a></li>
+        <li><a href="/pemilik/properti"><i class="flaticon-381-location-4"></i><span class="nav-text">Properti</span></a></li>
+        <li><a href="/pemilik/kamar"><i class="flaticon-381-bed"></i><span class="nav-text">Kamar</span></a></li>
+        <li><a href="/pemilik/booking"><i class="flaticon-381-calendar-1"></i><span class="nav-text">Booking</span></a></li>
+        <li><a href="/pemilik/penghuni"><i class="flaticon-381-user-7"></i><span class="nav-text">Penghuni</span></a></li>
+        <li><a href="/pemilik/kontrak"><i class="flaticon-381-notepad"></i><span class="nav-text">Kontrak</span></a></li>
+        <li><a href="/pemilik/dokumen"><i class="flaticon-381-file-1"></i><span class="nav-text">Dokumen</span></a></li>
+        <li><a href="/pemilik/tagihan"><i class="flaticon-381-file-1"></i><span class="nav-text">Tagihan</span></a></li>
+        <li><a href="/pemilik/pembayaran"><i class="flaticon-381-payment"></i><span class="nav-text">Pembayaran</span></a></li>
+        <li><a href="/pemilik/keuangan"><i class="flaticon-381-wallet"></i><span class="nav-text">Kas &amp; Bank</span></a></li>
+        <li><a href="/pemilik/pengeluaran"><i class="flaticon-381-price-tag"></i><span class="nav-text">Pengeluaran</span></a></li>
+        <li><a href="/pemilik/akuntansi"><i class="flaticon-381-calculator"></i><span class="nav-text">Akuntansi</span></a></li>
+        <li><a href="/pemilik/inventaris"><i class="flaticon-381-box"></i><span class="nav-text">Inventaris</span></a></li>
+        <li><a href="/pemilik/keluhan"><i class="flaticon-381-help"></i><span class="nav-text">Keluhan</span></a></li>
+        <li><a href="/pemilik/smart-kos"><i class="flaticon-381-network"></i><span class="nav-text">Smart Kos</span></a></li>
+        <li><a href="/pemilik/pengumuman"><i class="flaticon-381-bell"></i><span class="nav-text">Pengumuman</span></a></li>
+        <li><a href="/pemilik/laporan"><i class="flaticon-381-chart"></i><span class="nav-text">Laporan</span></a></li>
+        <li><a href="/pemilik/pengaturan"><i class="flaticon-381-settings-2"></i><span class="nav-text">Pengaturan</span></a></li>
+    </ul><div class="copyright"><p>Alam Segar</p><p class="fs-12">Sistem Manajemen Kos</p></div></div></div>
+    <div class="content-body"><div class="container-fluid">
+{{end}}
+
+{{define "owner_end"}}
+    </div></div>
+    <div class="footer"><div class="copyright"><p>Alam Segar — Sistem Manajemen Kos</p></div></div>
+</div>
+<script nonce="{{.CSPNonce}}">var enableSupportButton = 'false'; var asset_url = '/assets/admin/';</script>
+<script src="/assets/admin/vendor/global/global.min.js"></script>
+<script src="/assets/admin/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="/assets/admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/assets/admin/vendor/apexchart/apexchart.js"></script>
+<script src="/assets/admin/js/custom.js"></script>
+<script src="/assets/admin/js/dlabnav-init.js"></script>
+<script nonce="{{.CSPNonce}}">
+(function($){
+    $(function(){
+        $('table.table').each(function(){
+            var $table=$(this);
+            if(!$table.hasClass('table-plain') && $table.find('thead th').length && !$.fn.dataTable.isDataTable(this)){
+                $table.DataTable({pageLength:10,order:[],autoWidth:false,scrollX:true,language:{search:'Cari:',lengthMenu:'Tampilkan _MENU_ baris',info:'Baris _START_–_END_ dari _TOTAL_',infoEmpty:'Belum ada data',zeroRecords:'Data tidak ditemukan',paginate:{first:'Awal',last:'Akhir',next:'Berikutnya',previous:'Sebelumnya'}}});
+            }
+        });
+        var trend=document.querySelector('#owner-finance-trend');
+        if(trend && window.ApexCharts){
+            var points=[].slice.call(document.querySelectorAll('#owner-chart-data .chart-point'));
+            new ApexCharts(trend,{chart:{type:'area',height:320,toolbar:{show:false}},series:[{name:'Pendapatan',data:points.map(function(x){return Number(x.dataset.revenue)})},{name:'Beban',data:points.map(function(x){return Number(x.dataset.expenses)})}],xaxis:{categories:points.map(function(x){return x.dataset.label})},colors:['#79552a','#e35d6a'],stroke:{curve:'smooth',width:3},fill:{type:'gradient',gradient:{opacityFrom:.28,opacityTo:.04}},dataLabels:{enabled:false},yaxis:{labels:{formatter:function(v){return 'Rp'+Math.round(v/1000)+' rb'}}},tooltip:{y:{formatter:function(v){return new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(v)}}}}).render();
+        }
+        var rooms=document.querySelector('#owner-room-chart');
+        if(rooms && window.ApexCharts){
+            new ApexCharts(rooms,{chart:{type:'donut',height:300},series:[Number(rooms.dataset.occupied),Number(rooms.dataset.available),Number(rooms.dataset.maintenance)],labels:['Terisi','Tersedia','Perawatan'],colors:['#79552a','#50bda1','#f5a623'],legend:{position:'bottom'},dataLabels:{enabled:true}}).render();
+        }
+		document.querySelectorAll('[data-print-page]').forEach(function(button){button.addEventListener('click',function(){window.print()})});
+    });
+})(jQuery);
+</script>
+</body>
+</html>
+{{end}}
+

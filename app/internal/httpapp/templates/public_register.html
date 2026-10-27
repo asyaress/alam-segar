@@ -1,0 +1,17 @@
+{{define "public_register"}}
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{{.Title}}</title>
+<link rel="stylesheet" href="/assets/public/css/bootstrap.min.css"><link rel="stylesheet" href="/assets/public/css/style.css"></head><body>
+<div class="subheader bg-cover bg-overlay-dark" style="background-image:url('/assets/public/images/subheader.jpg')"><div class="container"><h1 class="page-title">Bikin Akun</h1></div></div>
+<section><div class="container"><div class="row justify-content-center"><div class="col-lg-7">
+{{if .Error}}<div class="alert alert-danger">{{.Error}}</div>{{end}}{{if .Success}}<div class="alert alert-success">{{.Success}}</div>{{end}}
+{{if .DevLink}}<div class="alert alert-warning"><strong>Mode lokal:</strong> email belum terkirim. <a href="{{.DevLink}}">Buka link verifikasi</a>.</div>{{end}}
+<div class="de-box"><h3>Join Alam Segar</h3><p>Aktif setelah email dan approval owner.</p>
+<form method="post" action="/daftar"><input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+{{$f := .Payload.Form}}
+<div class="mb-3"><label for="name">Nama lengkap</label><input class="form-control" id="name" name="name" value="{{$f.name}}" required></div>
+<div class="row"><div class="col-md-6 mb-3"><label for="email">Email</label><input class="form-control" id="email" name="email" type="email" value="{{$f.email}}" required></div><div class="col-md-6 mb-3"><label for="phone">Nomor telepon</label><input class="form-control" id="phone" name="phone" value="{{$f.phone}}" required></div></div>
+<div class="mb-3"><label for="password">Kata sandi</label><input class="form-control" id="password" name="password" type="password" required><small>Minimal 12 karakter, huruf besar/kecil, angka, dan simbol.</small></div>
+<div class="row"><div class="col-md-6 mb-3"><label for="emergency_name">Kontak darurat (opsional)</label><input class="form-control" id="emergency_name" name="emergency_name" value="{{$f.emergency_name}}"></div><div class="col-md-6 mb-3"><label for="emergency_phone">Telepon darurat</label><input class="form-control" id="emergency_phone" name="emergency_phone" value="{{$f.emergency_phone}}"></div></div>
+<button class="btn-main w-100" type="submit">Daftar</button></form><p class="mt-3">Sudah punya akun? <a href="/masuk">Masuk</a></p></div>
+</div></div></div></section><script src="/assets/public/js/bootstrap.bundle.min.js"></script></body></html>
+{{end}}

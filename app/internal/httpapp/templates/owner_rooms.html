@@ -1,0 +1,14 @@
+{{define "owner_rooms"}}
+{{template "owner_start" .}}
+<div class="d-flex justify-content-between align-items-center mb-4"><div><h3 class="mb-1">Kamar</h3><p class="mb-0">Status hunian dihitung dari booking, kontrak, dan kondisi kamar.</p></div><a href="/pemilik/kamar/baru" class="btn btn-primary">Tambah Kamar</a></div>
+{{if .Success}}<div class="alert alert-success" role="status">{{.Success}}</div>{{end}}
+<div class="card"><div class="card-body">
+{{if .RoomsAdmin}}
+<div class="table-responsive"><table class="table table-responsive-md"><thead><tr><th>Kamar</th><th>Properti</th><th>Tipe</th><th>Tarif Bulanan</th><th>Status</th><th>Publik</th><th></th></tr></thead><tbody>
+{{range .RoomsAdmin}}<tr><td><strong>{{.Number}}</strong></td><td>{{.PropertyName}}</td><td>{{.TypeName}}</td><td>{{rupiah .MonthlyRate}}</td><td>{{.OccupancyLabel}}</td><td>{{if .Published}}Ya{{else}}Tidak{{end}}</td><td><a class="btn btn-primary btn-sm" href="/pemilik/kamar/{{.ID}}/ubah">Ubah</a></td></tr>{{end}}
+</tbody></table></div>
+{{else}}<div class="text-center py-5"><h5>Belum ada kamar</h5><p class="text-muted">Tambahkan kamar setelah properti tersedia.</p><a href="/pemilik/kamar/baru" class="btn btn-primary">Tambah Kamar</a></div>{{end}}
+</div></div>
+{{template "owner_end" .}}
+{{end}}
+

@@ -1,0 +1,14 @@
+{{define "owner_properties"}}
+{{template "owner_start" .}}
+<div class="d-flex justify-content-between align-items-center mb-4"><div><h3 class="mb-1">Properti</h3><p class="mb-0">Kelola bangunan kos tanpa mencampur data antarproperti.</p></div><a href="/pemilik/properti/baru" class="btn btn-primary">Tambah Properti</a></div>
+{{if .Success}}<div class="alert alert-success" role="status">{{.Success}}</div>{{end}}
+<div class="card"><div class="card-body">
+{{if .Properties}}
+<div class="table-responsive"><table class="table table-responsive-md"><thead><tr><th>Kode</th><th>Nama &amp; Alamat</th><th>Kamar</th><th>Publik</th><th>Status</th><th></th></tr></thead><tbody>
+{{range .Properties}}<tr><td><strong>{{.Code}}</strong></td><td>{{.Name}}<br><small>{{.Address}}</small></td><td>{{.ActiveRooms}} aktif / {{.RoomCount}} total</td><td>{{if .Published}}Ya{{else}}Tidak{{end}}</td><td>{{if eq .Status "active"}}Aktif{{else}}Nonaktif{{end}}</td><td><a class="btn btn-primary btn-sm" href="/pemilik/properti/{{.ID}}/ubah">Ubah</a></td></tr>{{end}}
+</tbody></table></div>
+{{else}}<div class="text-center py-5"><h5>Belum ada properti</h5><p class="text-muted">Tambahkan properti sebelum membuat kamar.</p><a href="/pemilik/properti/baru" class="btn btn-primary">Tambah Properti</a></div>{{end}}
+</div></div>
+{{template "owner_end" .}}
+{{end}}
+

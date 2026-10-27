@@ -1,0 +1,32 @@
+{{define "owner_room_form"}}
+{{template "owner_start" .}}
+<div class="row justify-content-center"><div class="col-xl-10"><div class="card"><div class="card-header"><h4 class="card-title">{{if .RoomForm.ID}}Ubah Kamar{{else}}Tambah Kamar{{end}}</h4></div><div class="card-body">
+{{if .Error}}<div class="alert alert-danger" role="alert">{{.Error}}</div>{{end}}
+{{if not .PropertyOptions}}<div class="alert alert-warning">Tambahkan properti aktif terlebih dahulu.</div>{{else}}
+{{if .RoomForm.Photos}}<div class="row mb-4">{{range .RoomForm.Photos}}<div class="col-md-3 mb-3"><img class="img-fluid rounded mb-2" src="/uploads/{{.Path}}" alt="{{.AltText}}"><form method="post" action="/pemilik/kamar/{{$.RoomForm.ID}}/foto/{{.ID}}/hapus"><input type="hidden" name="csrf_token" value="{{$.CSRFToken}}"><button class="btn btn-outline-danger btn-sm w-100" type="submit">Hapus foto</button></form></div>{{end}}</div>{{end}}
+<form method="post" enctype="multipart/form-data" action="{{if .RoomForm.ID}}/pemilik/kamar/{{.RoomForm.ID}}/ubah{{else}}/pemilik/kamar/baru{{end}}" novalidate>
+    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+    <div class="row">
+        <div class="col-md-6 mb-3"><label class="form-label" for="property_id">Properti</label><select id="property_id" name="property_id" class="form-control" required><option value="">Pilih properti</option>{{range .PropertyOptions}}<option value="{{.ID}}" {{if eq .ID $.RoomForm.PropertyID}}selected{{end}}>{{.Name}}</option>{{end}}</select></div>
+        <div class="col-md-6 mb-3"><label class="form-label" for="type_name">Tipe Kamar</label><input id="type_name" name="type_name" class="form-control" value="{{.RoomForm.TypeName}}" maxlength="120" required></div>
+        <div class="col-md-4 mb-3"><label class="form-label" for="number">Nomor Kamar</label><input id="number" name="number" class="form-control" value="{{.RoomForm.Number}}" maxlength="40" required></div>
+        <div class="col-md-8 mb-3"><label class="form-label" for="slug">Slug URL</label><input id="slug" name="slug" class="form-control" value="{{.RoomForm.Slug}}" maxlength="140" required></div>
+        <div class="col-md-6 mb-3"><label class="form-label" for="block_name">Blok</label><input id="block_name" name="block_name" class="form-control" value="{{.RoomForm.BlockName}}" maxlength="80"></div>
+        <div class="col-md-6 mb-3"><label class="form-label" for="floor_name">Lantai</label><input id="floor_name" name="floor_name" class="form-control" value="{{.RoomForm.FloorName}}" maxlength="80"></div>
+        <div class="col-md-6 mb-3"><label class="form-label" for="monthly_rate">Tarif Bulanan (rupiah)</label><input id="monthly_rate" name="monthly_rate" type="number" class="form-control" min="1" step="1" value="{{.RoomForm.MonthlyRate}}" required></div>
+        <div class="col-md-6 mb-3"><label class="form-label" for="annual_rate">Tarif Tahunan (opsional)</label><input id="annual_rate" name="annual_rate" type="number" class="form-control" min="0" step="1" value="{{if .RoomForm.AnnualRate}}{{.RoomForm.AnnualRate}}{{end}}"></div>
+        <div class="col-md-6 mb-3"><label class="form-label" for="electricity_customer_number">ID Token PLN Privat</label><input id="electricity_customer_number" name="electricity_customer_number" class="form-control" value="{{.RoomForm.ElectricityCustomerNumber}}" maxlength="100"><small>Tidak ditagihkan oleh kos.</small></div>
+        <div class="col-md-6 mb-3"><label class="form-label" for="water_customer_number">Nomor Pelanggan PDAM Privat</label><input id="water_customer_number" name="water_customer_number" class="form-control" value="{{.RoomForm.WaterCustomerNumber}}" maxlength="100"><small>Tidak ditagihkan oleh kos.</small></div>
+        <div class="col-md-6 mb-3"><label class="form-label" for="condition">Kondisi</label><select id="condition" name="condition" class="form-control" required><option value="ready" {{if eq .RoomForm.Condition "ready"}}selected{{end}}>Layak / siap</option><option value="maintenance" {{if eq .RoomForm.Condition "maintenance"}}selected{{end}}>Perawatan</option><option value="inactive" {{if eq .RoomForm.Condition "inactive"}}selected{{end}}>Nonaktif</option></select></div>
+        <div class="col-md-6 mb-3 d-flex align-items-end"><div class="form-check"><input id="published" name="published" value="1" type="checkbox" class="form-check-input" {{if .RoomForm.Published}}checked{{end}}><label class="form-check-label" for="published">Tampilkan pada katalog publik</label></div></div>
+        <div class="col-12 mb-3"><label class="form-label" for="description">Deskripsi</label><textarea id="description" name="description" class="form-control">{{.RoomForm.Description}}</textarea></div>
+        <div class="col-12 mb-3"><label class="form-label" for="amenities">Fasilitas</label><input id="amenities" name="amenities" class="form-control" value="{{.RoomForm.AmenitiesText}}" placeholder="Wi-Fi, Lemari, Kamar mandi dalam"><small>Pisahkan dengan koma, maksimal 20 fasilitas.</small></div>
+        <div class="col-md-6 mb-3"><label class="form-label" for="photos">Foto kamar</label><input id="photos" name="photos" type="file" class="form-control" accept="image/jpeg,image/png" multiple><small>Maksimal 10 foto per kamar, masing-masing 5 MB.</small></div>
+        <div class="col-md-6 mb-3"><label class="form-label" for="photo_alt">Teks alternatif foto</label><input id="photo_alt" name="photo_alt" class="form-control" value="{{.RoomForm.PhotoAlt}}" maxlength="255" placeholder="Kamar {{.RoomForm.Number}} Alam Segar"></div>
+    </div>
+    <div class="d-flex gap-2"><button class="btn btn-primary" type="submit">Simpan</button><a class="btn btn-light" href="/pemilik/kamar">Batal</a></div>
+</form>{{end}}
+</div></div></div></div>
+{{template "owner_end" .}}
+{{end}}
+

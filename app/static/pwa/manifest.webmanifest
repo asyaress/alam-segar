@@ -1,0 +1,25 @@
+{
+  "id": "/penghuni",
+  "name": "My Kos · Alam Segar",
+  "short_name": "Alam Segar",
+  "description": "Kamar, tagihan, Smart Kos, dan semua update kamu.",
+  "lang": "id-ID",
+  "dir": "ltr",
+  "start_url": "/penghuni?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f7f4ee",
+  "theme_color": "#79552a",
+  "categories": ["business", "finance", "utilities"],
+  "icons": [
+    {"src": "/pwa/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"},
+    {"src": "/pwa/icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "My Bills", "short_name": "Tagihan", "url": "/penghuni/tagihan", "icons": [{"src": "/pwa/icon.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "My Room", "short_name": "Kamar", "url": "/penghuni/kamar", "icons": [{"src": "/pwa/icon.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "Smart Kos", "short_name": "Layanan", "url": "/penghuni/layanan", "icons": [{"src": "/pwa/icon.svg", "sizes": "any", "type": "image/svg+xml"}]},
+    {"name": "My Docs", "short_name": "Docs", "url": "/penghuni/dokumen", "icons": [{"src": "/pwa/icon.svg", "sizes": "any", "type": "image/svg+xml"}]}
+  ]
+}

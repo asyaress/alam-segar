@@ -1,0 +1,50 @@
+{{define "owner_booking"}}{{template "owner_start" .}}
+        {{if .Error}}<div class="alert alert-danger" role="alert">{{.Error}}</div>{{end}}
+        {{if .Success}}<div class="alert alert-success" role="status">{{.Success}}</div>{{end}}
+        <div class="card"><div class="card-header border-0"><h4 class="fs-20">Pengajuan Booking</h4></div><div class="card-body">
+            {{if .OwnerBookings}}
+            <div class="table-responsive"><table class="table table-responsive-md"><thead><tr><th>Referensi</th><th>Pemohon</th><th>Kamar &amp; Periode</th><th>Status</th><th>Tindakan</th></tr></thead><tbody>
+            {{range .OwnerBookings}}
+                <tr>
+                    <td><strong>{{.Reference}}</strong><br><small>{{.Email}}<br>{{.Phone}}</small></td>
+                    <td>{{.ApplicantName}}</td>
+                    <td>Kamar {{.Room}}<br><small>{{.StartDate}} — {{.EndDate}}</small></td>
+                    <td><span class="badge light badge-warning">{{statusLabel .Status}}</span></td>
+                    <td style="min-width:320px">
+                        {{if or (eq .Status "submitted") (eq .Status "under_review")}}
+                        <form action="/pemilik/booking/{{.ID}}/setujui" method="post" class="mb-3">
+                            <input type="hidden" name="csrf_token" value="{{$.CSRFToken}}">
+                            <label class="form-label">Nominal uang booking</label>
+                            <input type="number" name="booking_amount" class="form-control mb-2" min="1" step="1" required>
+                            <select name="booking_usage" class="form-control mb-2" required>
+                                <option value="">Pilih penggunaan</option>
+                                <option value="credit_first_rent">Mengurangi sewa pertama</option>
+                                <option value="additional_booking_fee">Biaya booking tambahan</option>
+                            </select>
+                            <button class="btn btn-success btn-sm" type="submit">Setujui &amp; Tahan Kamar</button>
+                        </form>
+                        <form action="/pemilik/booking/{{.ID}}/tolak" method="post">
+                            <input type="hidden" name="csrf_token" value="{{$.CSRFToken}}">
+                            <label class="form-label">Alasan penolakan</label>
+                            <textarea name="reason" class="form-control mb-2" minlength="5" required></textarea>
+                            <button class="btn btn-danger btn-sm" type="submit">Tolak</button>
+                        </form>
+                        {{else if eq .Status "approved_waiting_payment"}}
+                        <p><strong>{{rupiah .BookingAmount}}</strong><br>Menunggu bukti transfer</p><form method="post" action="/pemilik/booking/{{.ID}}/lepaskan"><input type="hidden" name="csrf_token" value="{{$.CSRFToken}}"><input class="form-control form-control-sm mb-1" name="reason" placeholder="Alasan pelepasan hold" required><button class="btn btn-warning btn-sm">Lepaskan Booking</button></form>
+                        {{else if and (eq .Status "proof_submitted") (eq .PaymentStatus "pending_verification")}}
+                        <p><strong>{{rupiah .BookingAmount}}</strong><br><a href="/pemilik/file/booking-payment/{{.PaymentID}}">Lihat bukti</a></p>
+                        <form class="mb-2" method="post" action="/pemilik/booking-pembayaran/{{.PaymentID}}/verifikasi"><input type="hidden" name="csrf_token" value="{{$.CSRFToken}}"><button class="btn btn-success btn-sm">Verifikasi Dana</button></form>
+                        <form method="post" action="/pemilik/booking-pembayaran/{{.PaymentID}}/tolak"><input type="hidden" name="csrf_token" value="{{$.CSRFToken}}"><input class="form-control form-control-sm mb-1" name="reason" placeholder="Alasan penolakan" required><button class="btn btn-danger btn-sm">Tolak Bukti</button></form>
+                        {{else if eq .Status "confirmed"}}
+                        <span class="badge light badge-success">Dana terverifikasi</span><br>
+                        {{if .AccountReady}}<span class="badge light badge-info mt-2">Akun penghuni aktif</span><br><a class="btn btn-primary btn-sm my-2" href="/pemilik/kontrak/baru?booking_id={{.ID}}">Buat Kontrak dari Booking</a>{{else}}<form class="my-2" method="post" action="/pemilik/booking/{{.ID}}/buat-akun"><input type="hidden" name="csrf_token" value="{{$.CSRFToken}}"><button class="btn btn-primary btn-sm">{{if .TenantID}}Kirim Ulang Aktivasi Akun{{else}}Buat &amp; Kirim Akun Penghuni{{end}}</button></form><small class="d-block text-muted">Akun harus diaktifkan dari email sebelum kontrak dibuat.</small>{{end}}
+                        <details><summary>Refund manual penuh</summary><form class="mt-2" method="post" action="/pemilik/booking/{{.ID}}/refund" enctype="multipart/form-data"><input type="hidden" name="csrf_token" value="{{$.CSRFToken}}"><select class="form-control form-control-sm mb-1" name="bank_account_id" required>{{range $.Payload.Accounts}}{{if eq .Type "bank"}}<option value="{{.ID}}">{{.Name}}</option>{{end}}{{end}}</select><input class="form-control form-control-sm mb-1" type="number" name="amount" min="{{.BookingAmount}}" max="{{.BookingAmount}}" value="{{.BookingAmount}}" required><input class="form-control form-control-sm mb-1" type="date" name="refund_date" required><input class="form-control form-control-sm mb-1" name="reason" placeholder="Alasan refund" required><input class="form-control form-control-sm mb-1" type="file" name="proof" required><button class="btn btn-danger btn-sm">Posting Refund Penuh</button></form></details>
+                        {{else}}<span class="text-muted">Sudah diproses</span>{{end}}
+                    </td>
+                </tr>
+            {{end}}
+            </tbody></table></div>
+            {{else}}<div class="text-center py-5"><h5>Belum ada pengajuan booking</h5><p class="text-muted">Pengajuan dari landing page akan muncul di sini.</p></div>{{end}}
+        </div></div>
+{{template "owner_end" .}}{{end}}
+

@@ -1,0 +1,22 @@
+# Konfigurasi lokal dan rahasia
+.env
+app/.env
+
+# Hasil build dan runtime
+app/bin/
+app/tmp/
+app/storage/private/*
+!app/storage/private/.gitkeep
+app/storage/public/*
+!app/storage/public/.gitkeep
+*.exe
+*.test
+coverage.out
+*.log
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+

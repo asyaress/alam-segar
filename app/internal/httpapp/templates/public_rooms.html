@@ -1,0 +1,83 @@
+{{define "public_rooms"}}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <title>{{.Title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daftar kamar kos yang sedang ditawarkan.">
+    <link rel="icon" href="/assets/public/images/icon.png" type="image/png">
+    <link rel="stylesheet" href="/assets/public/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/plugins.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/color.css" type="text/css">
+    <link rel="stylesheet" href="/assets/public/css/colors/brown.css" type="text/css">
+</head>
+<body>
+<div id="wrapper">
+    <header class="header-fullwidth">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="logo"><a href="/"><img class="logo" src="/assets/public/images/logo.png" alt="Alam Segar"></a></div>
+                    <span id="menu-btn"></span>
+                    <nav><ul id="mainmenu">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/kamar">Kamar</a></li>
+                        <li><a href="/booking">Booking</a></li>
+                        <li><a href="/masuk">Masuk</a></li>
+                    </ul></nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="subheader" data-bgimage="url(/assets/public/images/background/5.jpg)" class="text-light">
+        <div class="center-y relative text-center">
+            <div class="container"><div class="row"><div class="col-md-12">
+                <h1>Kamar</h1>
+                <p>Cari yang paling match buat kamu.</p>
+            </div></div></div>
+        </div>
+    </section>
+
+    <section aria-labelledby="judul-daftar-kamar">
+        <div class="container">
+            <div class="row"><div class="col-md-12 text-center">
+                <h2 id="judul-daftar-kamar">Kamar Available</h2>
+            </div></div>
+            <div class="row">
+                {{if .Rooms}}
+                    {{range .Rooms}}
+                    <div class="col-lg-4 col-md-6 mb30">
+                        <div class="room">
+                            <div class="picframe">
+                                <a href="/properti/{{.PropertySlug}}/kamar/{{.Slug}}"><span class="overlay"><span class="pf_text"><span class="project-name">Cek Detail</span></span></span></a>
+                                <img src="{{if .CoverPhoto}}/uploads/{{.CoverPhoto}}{{else}}/assets/public/images/room/1.jpg{{end}}" alt="Kamar {{.Number}}" class="img-fluid">
+                            </div>
+                            <div class="room-info">
+                                <h4>{{.TypeName}} — {{.Number}}</h4>
+                                <p>{{if .Description}}{{.Description}}{{else}}Informasi kamar akan dilengkapi oleh pemilik.{{end}}</p>
+                                <span class="price">{{rupiah .MonthlyRate}} / bulan</span>
+                            </div>
+                        </div>
+                    </div>
+                    {{end}}
+                {{else}}
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <div class="p-5 border">
+                            <h3>Belum ada kamar available</h3>
+                            <p>Check lagi nanti, ya.</p>
+                        </div>
+                    </div>
+                {{end}}
+            </div>
+        </div>
+    </section>
+</div>
+<script src="/assets/public/js/plugins.js"></script>
+<script src="/assets/public/js/designesia.js"></script>
+</body>
+</html>
+{{end}}
+

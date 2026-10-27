@@ -1,0 +1,3 @@
+{{define "tenant_announcements"}}{{template "tenant_start" .}}{{$p:=.Payload}}
+{{range $p.Items}}<div class="card"><div class="card-header"><div><h4>{{.Title}}</h4><small>{{.Property}} · {{tanggal .PublishedAt}}</small></div></div><div class="card-body"><p class="mb-0" style="white-space:pre-wrap">{{.Body}}</p></div></div>{{else}}<div class="card"><div class="card-body text-center py-5"><h5>Belum ada pengumuman</h5><p class="text-muted">Informasi dari pemilik akan tampil di sini.</p></div></div>{{end}}
+{{template "tenant_end" .}}{{end}}
